@@ -40,7 +40,7 @@ const Login = () => {
     const data = { email, password }
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/token",
+        "/api/token",
         data,
         {
           headers: { "Content-Type": "application/json" },
@@ -50,7 +50,7 @@ const Login = () => {
       data["token"] = response?.data;
       setAuthToken(response?.data);
 
-      const getUser = await axios.get("http://localhost:8080/api/users/details");
+      const getUser = await axios.get("/api/users/details");
       const user = {...getUser.data, token: response?.data}
       
       login(user);
