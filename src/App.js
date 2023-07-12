@@ -52,7 +52,7 @@ const GetUserData = () => {
   const user = window.localStorage.getItem("user");
 
   // const fetchUser = async () => {
-  //   const responce = await axios.get("http://localhost:8080/api/users/details");
+  //   const responce = await axios.get("/api/users/details");
   //   console.log(responce.data);
   //   const data = {
   //     ...JSON.parse(user),
@@ -72,7 +72,7 @@ const GetUserData = () => {
   // const response = {...fetchUser, "firstName": fetchUser.firstName, "lastName": fetchUser.lastName}
   // if (user.token) {
   // console.log("inside if")
-  // const userFetch = axios.get("http://localhost:8080/api/users/details")
+  // const userFetch = axios.get("/api/users/details")
   // .then(data => console.log(data.data))
   // }
   return user;

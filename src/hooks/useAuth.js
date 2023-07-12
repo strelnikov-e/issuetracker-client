@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
     // after succesful login - fetch user data and set the project user working on
     const response = await axios.get(
-      "http://localhost:8080/api/users/details",
+      "/api/users/details",
       data,
       {
         headers: { "Content-Type": "application/json" },

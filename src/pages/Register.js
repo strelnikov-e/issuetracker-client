@@ -83,7 +83,7 @@ export default function Login() {
     }
     try {
       await axios.post(
-        "http://localhost:8080/api/users",
+        "/api/users",
         JSON.stringify({ email, password: pwd, firstName, lastName, company }),
         {
           headers: { "Content-Type": "application/json" },

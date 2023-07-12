@@ -52,7 +52,7 @@ export const Projects = () => {
     // let updatedProjects = [...projects].filter((i) => i.id !== id);
     // setProjects(updatedProjects);
     const response = await axios.get(
-      "http://localhost:8080/api/users/details",
+      "/api/users/details",
       {
         headers: { "Content-Type": "application/json" },
       }

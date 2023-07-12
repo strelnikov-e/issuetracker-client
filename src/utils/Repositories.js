@@ -83,7 +83,7 @@ export const useChangeProject = async (id) => {
 };
 
 export const useFetchUserDetails = async () => {
-  const responce = await axios.get("http://localhost:8080/api/users/details");
+  const responce = await axios.get("/api/users/details");
   // console.log(responce.data);
   return responce.data;
 };
