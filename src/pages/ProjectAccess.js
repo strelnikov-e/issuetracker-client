@@ -8,44 +8,33 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import Stack from "react-bootstrap/Stack";
-import { Dropdown, FormControl } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Toast from "react-bootstrap/Toast";
 
 import {
   CaretRightFill,
   ExclamationCircle,
-  ExclamationCircleFill,
-  ExclamationDiamondFill,
-  ExclamationTriangleFill,
 } from "react-bootstrap-icons";
 import { CaretLeftFill } from "react-bootstrap-icons";
 import { Plus } from "react-bootstrap-icons";
 import { InfoCircleFill } from "react-bootstrap-icons";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { UserBadge } from "../components/UserBadge";
 import { useFetchUserRoles } from "../utils/Repositories";
-import { ProjectContext } from "../App";
 
-const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,50}$/;
+const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,50}$/;
 
 export const ProjectAccess = () => {
-  const { project } = useContext(ProjectContext);
   const { id } = useParams();
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
-  const [sort, setSort] = useState("id");
-  const [order, setOrder] = useState("desc");
-  const [filter, setFilter] = useState("");
-
-  const [showErrorToast, setShowErrorToast] = useState(true);
-  const toggleShowErrorToast = () => setShowErrorToast(!showErrorToast);
+  const [sort ] = useState("id");
+  const [order ] = useState("desc");
+  const [filter ] = useState("");
 
   const [userModalShow, setUserModalShow] = useState(false);
 
@@ -86,7 +75,7 @@ export const ProjectAccess = () => {
     queryClient.invalidateQueries({
       queryKey: ["roles", id, page, size, sort, order, filter],
     });
-  }, []);
+  }, [queryClient ,id, page, size, sort, order, filter]);
 
   // TO MAKE: proper loading state
   if (isLoading) {
@@ -107,7 +96,6 @@ export const ProjectAccess = () => {
   const AddUserModal = (props) => {
     const [email, setEmail] = useState("");
     const [validEmail, setValidEmail] = useState(false);
-    const [role, setRole] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [draftUser, setDaftUser] = useState({
       role: "VIEWER",

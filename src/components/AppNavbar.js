@@ -10,7 +10,7 @@ import { ChevronDown } from "react-bootstrap-icons";
 
 export const ProjectsDropdown = ({ divider }) => {
   const { currentProject, setCurrentProject } = useContext(ProjectContext);
-  const { data, isLoading, error } = useFetchProjects();
+  const { data, isLoading } = useFetchProjects();
   const [user, setUser] = useLocalStorage("user");
 
   if (isLoading) return <p className="ms-3 mb-1 text-muted"> Loading...</p>;
@@ -48,14 +48,14 @@ export const ProjectsDropdown = ({ divider }) => {
 };
 
 function AppNavbar() {
-  const { currentProject, setCurrentProject } = useContext(ProjectContext);
+  const { currentProject } = useContext(ProjectContext);
   // const { user,  } = useAuth();
 
   return (
     <>
       <NavLink
         className={
-          currentProject == null || currentProject.id == 0
+          currentProject === null || currentProject.id === 0
             ? "nav-link disabled me-3"
             : "nav-link me-3"
         }
@@ -82,7 +82,7 @@ function AppNavbar() {
 
       <NavLink
         className={
-          currentProject == null || currentProject.id == 0
+          currentProject === null || currentProject.id === 0
             ? "nav-link disabled me-3"
             : "nav-link me-3"
         }

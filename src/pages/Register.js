@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, isValidElement } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
@@ -10,7 +10,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import "../css/Login.css";
 
-const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,50}$/;
+const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,50}$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
 export default function Login() {
@@ -30,11 +30,9 @@ export default function Login() {
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
 
   const [matchPwd, setMatchPwd] = useState("");
   const [validMatchPwd, setValidMatchPwd] = useState(false);
-  const [matchPwdFocus, setMatchPwdFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
 
@@ -84,7 +82,7 @@ export default function Login() {
       return;
     }
     try {
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:8080/api/users",
         JSON.stringify({ email, password: pwd, firstName, lastName, company }),
         {

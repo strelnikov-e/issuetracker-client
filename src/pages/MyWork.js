@@ -1,47 +1,23 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import dayjs from "dayjs";
 
-import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/esm/Button";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Stack from "react-bootstrap/Stack";
-import { Badge, Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Modal } from "react-bootstrap";
+import { Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
 
 import {
-  CaretDownFill,
   ChevronLeft,
   ChevronRight,
-  List,
-  Record,
   RecordFill,
-  ThreeDots,
 } from "react-bootstrap-icons";
-import { CaretUpFill } from "react-bootstrap-icons";
-import { CaretRightFill } from "react-bootstrap-icons";
-import { CaretLeftFill } from "react-bootstrap-icons";
-import { Plus } from "react-bootstrap-icons";
-import { CheckCircle } from "react-bootstrap-icons";
-import { Filter } from "react-bootstrap-icons";
 import { ArrowDownUp } from "react-bootstrap-icons";
 
-import { PriorityBadge } from "../components/PriorityBadge";
-import { StatusBadge, StatusConverter } from "../components/StatusBadge";
-import { TypeBadgeIcon } from "../components/TypeBadge";
-import { useFetchIssues, useFetchMyWork } from "../utils/Repositories";
-import { useFetchUsers } from "../utils/Repositories";
-import { UserBadge } from "../components/UserBadge";
-import { editIcon, trashIcon } from "../components/icons";
+import { StatusConverter } from "../components/StatusBadge";
+import { useFetchMyWork } from "../utils/Repositories";
 import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
-import { Component } from "react";
 
 export const issueLoader = async () => {
   const response = await axios.get("/api/issues");
@@ -70,11 +46,6 @@ export default function MyWork() {
     sort,
     order
   );
-  const {
-    data: users,
-    isLoading: usersLoading,
-    error: usersError,
-  } = useFetchUsers(currentProject?.id);
   // we use the meta data returned in the response to disable
   // the "Next" button below
   const meta = data?.page || {};
@@ -88,16 +59,6 @@ export default function MyWork() {
     queryClient.invalidateQueries({
       queryKey: ["mywork", currentProject.id, page, size, sort, order],
     });
-  };
-
-  const SortIcon = ({ param }) => {
-    if (sort === param) {
-      if (order === "desc") {
-        return <CaretDownFill className="ms-auto" />;
-      } else {
-        return <CaretUpFill className="ms-auto" />;
-      }
-    }
   };
 
   const IssueList = () => {

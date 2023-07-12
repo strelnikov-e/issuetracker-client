@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
@@ -23,7 +23,7 @@ export default function IssueDetails() {
   const queryClient = useQueryClient();
   const { id } = useParams();
   const { user } = useAuth();
-  const { data, isLoading, error } = useFetchUsers(currentProject.id);
+  const { data, isLoading } = useFetchUsers(currentProject.id);
 
   const currentDate = new Date();
 

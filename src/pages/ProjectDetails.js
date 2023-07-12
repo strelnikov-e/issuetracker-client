@@ -1,17 +1,15 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Dropdown } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import axios from "axios";
 import dayjs from "dayjs";
 import { UserBadge } from "../components/UserBadge";
 import { useAuth } from "../hooks/useAuth";
-import { useFetchUsers } from "../utils/Repositories";
 
 export default function ProjectDetails() {
   const { user } = useAuth();
@@ -30,19 +28,18 @@ export default function ProjectDetails() {
   const [project, setProject] = useState(initialFormState);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isLoading, error } = useFetchUsers(id);
 
-  const fetch = async () => {
-    const response = await axios.get(`/api/projects/${id}`);
-    return response;
-  };
+  // const fetch = async () => {
+  //   const response = await axios.get(`/api/projects/${id}`);
+  //   return response;
+  // };
 
   useEffect(() => {
     if (id !== "new") {
-      fetch()
+      axios.get(`/api/projects/${id}`)
         .then((data) => setProject(data.data));
     }
-  }, [id, setProject]);
+  }, [id, setProject ]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -66,39 +63,6 @@ export default function ProjectDetails() {
     <h4 className="mb-4">{project.id ? "Edit project" : "Create project"}</h4>
   );
 
-  const ManagerDropdown = () => {
-    if (isLoading) return <p>Loading...</p>;
-
-    return (
-      <>
-        {data?._embedded?.userModelList.map((u) => (
-          <Dropdown.Item
-            key={u.id}
-            onClick={() => setProject({ ...project, manager: u })}
-          >
-            <UserBadge user={u}></UserBadge>
-          </Dropdown.Item>
-        ))}
-      </>
-    );
-  };
-
-  const AdminDropdown = () => {
-    if (isLoading) return <p>Loading...</p>;
-
-    return (
-      <>
-        {data?._embedded?.userModelList.map((u) => (
-          <Dropdown.Item
-            key={u.id}
-            onClick={() => setProject({ ...project, admin: u })}
-          >
-            <UserBadge user={u}></UserBadge>
-          </Dropdown.Item>
-        ))}
-      </>
-    );
-  };
 
   return (
     <Form className="" onSubmit={handleSubmit}>

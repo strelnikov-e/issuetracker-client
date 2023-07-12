@@ -1,26 +1,20 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Dropdown } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import axios from "axios";
-import dayjs from "dayjs";
 import { UserBadge } from "../components/UserBadge";
-import { useAuth } from "../hooks/useAuth";
-import { useFetchUsers } from "../utils/Repositories";
 
-
-import { useChangeProject, useFetchProjects } from "../utils/Repositories";
+import { useChangeProject } from "../utils/Repositories";
 import { ProjectContext } from "../App";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export default function CreateProjectPage() {
-  const { currentProject, setCurrentProject } = useContext(ProjectContext);
+  const { setCurrentProject } = useContext(ProjectContext);
   const [user, setUser] = useLocalStorage("user");
   let initialFormState = {
     id: "",
@@ -36,7 +30,6 @@ export default function CreateProjectPage() {
 
   const [project, setProject] = useState(initialFormState);
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,7 +48,9 @@ export default function CreateProjectPage() {
     if (project.id) {
       axios.put(`/api/projects/${project.id}`, project);
     } else {
-      axios.post(`/api/projects`, project).then(data => HandleChooseProject(data.data));
+      axios
+        .post(`/api/projects`, project)
+        .then((data) => HandleChooseProject(data.data));
     }
 
     setProject(initialFormState);
@@ -142,7 +137,6 @@ export default function CreateProjectPage() {
                   <UserBadge user={draftUser}></UserBadge>
                 </Col>
               </Row>
-            
             </Card.Body>
           </Card>
         </Col>

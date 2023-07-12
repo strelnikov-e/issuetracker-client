@@ -1,26 +1,22 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 // pages and utilities
-import { useFetchBoards, useFetchIssues } from "../utils/Repositories";
+import { useFetchBoards } from "../utils/Repositories";
 import IssueBoard from "../components/IssueBoard";
 import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
-
-import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-import { Row, Table } from "react-bootstrap";
-import { Toggle2On } from "react-bootstrap-icons";
 
 export default function Boards() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState("/mywork");
-  const [sort, setSort] = useState("startDate");
-  const [order, setOrder] = useState("desc");
+  const [sort ] = useState("startDate");
+  const [order ] = useState("desc");
 
   const { currentProject } = useContext(ProjectContext);
 
@@ -153,25 +149,6 @@ export default function Boards() {
     } else {
       return <p>An error occured: {error.message}</p>;
     }
-  }
-  {
-    /* <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="row gy-3 gx-2">
-        {data.columnOrder.map((column) => {
-          const issueList = data.columns[column].issueIds.map(
-            (id) => data.issues[id]
-          );
-          return (
-            <IssueBoard
-              key={column}
-              data={issueList}
-              project={currentProject}
-              status={column}
-            />
-          );
-        })}
-      </div>
-    </DragDropContext> */
   }
   // className="d-flex flex-row flex-nowrap overflow-auto"
   return (

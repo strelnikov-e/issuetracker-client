@@ -17,7 +17,6 @@ import {
   InfoCircleFill,
   ThreeDots,
 } from "react-bootstrap-icons";
-import { CaretLeftFill } from "react-bootstrap-icons";
 
 import { useFetchProjects } from "../utils/Repositories";
 
@@ -66,7 +65,7 @@ export const Projects = () => {
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ["projects", page, size] });
-  }, []);
+  }, [page, queryClient, size]);
 
   // TO MAKE: proper loading state
   if (isLoading) {
@@ -84,8 +83,6 @@ export const Projects = () => {
   }
 
   const projectList = data._embedded?.projectModelList?.map((project) => {
-    const id = project.id;
-    const name = project.name;
     // console.log(project);
     const managersPopover = (
       <Popover id="managersPopover">

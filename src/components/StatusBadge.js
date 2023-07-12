@@ -1,4 +1,3 @@
-import { Badge } from "react-bootstrap";
 
 export const StatusBadge = (props) => {
     const status = props.status;

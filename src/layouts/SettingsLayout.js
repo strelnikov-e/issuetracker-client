@@ -1,9 +1,7 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Button from "react-bootstrap/esm/Button";
 import Stack from "react-bootstrap/Stack";
-import { Plus } from "react-bootstrap-icons";
-import SideNavBar, { SettingsSideNavBar } from "../components/Sidebar";
+import  { SettingsSideNavBar } from "../components/Sidebar";
 import { Col, Row } from "react-bootstrap";
 
 import Breadcrumbs from "../components/Breadcrumbs";

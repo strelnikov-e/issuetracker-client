@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 
 import SideNav, {
-  Toggle,
-  Nav,
   NavItem,
   NavIcon,
   NavText,
 } from "@trendmicro/react-sidenav";
-import { CardList, Kanban, KanbanFill, ListColumns, ListUl, PencilSquare, PersonFillGear } from "react-bootstrap-icons";
+import { Kanban, ListUl, PencilSquare, PersonFillGear } from "react-bootstrap-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const SettingsSideNavBar = () => {

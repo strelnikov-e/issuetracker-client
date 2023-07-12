@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+
 import { useLoaderData, useOutlet, Await } from "react-router-dom";
 
 import { AuthProvider } from "../hooks/useAuth";

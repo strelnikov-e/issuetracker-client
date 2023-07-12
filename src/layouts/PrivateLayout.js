@@ -1,17 +1,15 @@
-import { Navigate, useOutlet, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import AppNavbarBase from "../components/AppNavbarBase";
 import { useEffect } from "react";
 import { setAuthToken } from "../utils/SetGlobalAuthToken";
-
-import Breadcrumbs from "../components/Breadcrumbs";
 
 export const PrivateLayout = () => {
   const { user } = useAuth();
 
   useEffect(() => {
     setAuthToken(user?.token);
-  }, []);
+  }, [user?.token]);
 
   if (!user) {
     return <Navigate to="/login" replace />;

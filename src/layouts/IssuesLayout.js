@@ -1,7 +1,6 @@
-import { Outlet, redirect, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { NavDropdown } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 
 import { CreateProject, ProjectContext } from "../App";
@@ -35,7 +34,7 @@ export default function IssuesLayout() {
     ) {
       navigate("/projects");
     }
-  }, []);
+  }, [currentProject, navigate]);
 
   if (
     !currentProject ||

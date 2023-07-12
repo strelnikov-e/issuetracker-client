@@ -26,6 +26,9 @@ export const PriorityConverter = (props) => {
           break;
         case "LOW":
           priority = "Low";
+          break;
+        default:
+          priority="Medium"
       }
       return priority;
   }

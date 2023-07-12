@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 export default function Breadcrumbs() {

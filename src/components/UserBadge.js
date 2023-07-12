@@ -36,10 +36,6 @@ export const UserBadgeLarge = ({ user }) => {
   const lastName = user?.lastName ? user.lastName.charAt(0) : "";
   const initials = firstName + lastName || "?";
 
-  const name1 = user?.firstName ? user.firstName : ""
-  const name2 = user?.lastName ? user.lastName : "";
-  const colorName = name1 + name2 || "?"
-
   const color = stringToHslColor(initials, saturation, light );
 
   return (

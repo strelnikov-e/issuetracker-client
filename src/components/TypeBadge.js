@@ -1,8 +1,6 @@
-import { Component } from "react";
-import { Badge } from "react-bootstrap";
+
 import { Clipboard, Gear } from "react-bootstrap-icons";
 import { Diagram3 } from "react-bootstrap-icons";
-import { Circle } from "react-bootstrap-icons";
 
 export const TypeBadge = (props) => {
   const type = props.type;
@@ -31,7 +29,7 @@ export const TypeBadgeIcon = (props) => {
         <Gear size={18} color="RebeccaPurple"/>
       ) : type === "MILESTONE" ? (
         <Diagram3 size={18} color="green"/>
-      ) : type == "TASK" ? (
+      ) : type === "TASK" ? (
         <Clipboard size={18} color="navy"/>
       ) : (
         <></>

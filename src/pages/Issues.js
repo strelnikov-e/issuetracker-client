@@ -7,9 +7,8 @@ import dayjs from "dayjs";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/esm/Button";
 import ToggleButton from "react-bootstrap/ToggleButton";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Stack from "react-bootstrap/Stack";
-import { Badge, Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
+import { Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -19,12 +18,9 @@ import {
   CaretDownFill,
   ChevronLeft,
   ChevronRight,
-  List,
   ThreeDots,
 } from "react-bootstrap-icons";
 import { CaretUpFill } from "react-bootstrap-icons";
-import { CaretRightFill } from "react-bootstrap-icons";
-import { CaretLeftFill } from "react-bootstrap-icons";
 import { Plus } from "react-bootstrap-icons";
 import { CheckCircle } from "react-bootstrap-icons";
 import { Filter } from "react-bootstrap-icons";
@@ -36,10 +32,8 @@ import { TypeBadgeIcon } from "../components/TypeBadge";
 import { useFetchIssues } from "../utils/Repositories";
 import { useFetchUsers } from "../utils/Repositories";
 import { UserBadge } from "../components/UserBadge";
-import { editIcon, trashIcon } from "../components/icons";
 import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
-import { Component } from "react";
 
 export const issueLoader = async () => {
   const response = await axios.get("/api/issues");
@@ -64,7 +58,6 @@ export default function Issues() {
 
   const [incomplete, setIncomplete] = useState(false);
 
-  const url = `/api/issues?project=${currentProject?.id || 0}`;
   const queryClient = useQueryClient();
   const { data, isLoading, error } = useFetchIssues(
     currentProject?.id || 0,
@@ -77,8 +70,6 @@ export default function Issues() {
   );
   const {
     data: users,
-    isLoading: usersLoading,
-    error: usersError,
   } = useFetchUsers(currentProject?.id);
   // we use the meta data returned in the response to disable
   // the "Next" button below
@@ -103,24 +94,24 @@ export default function Issues() {
     },
   });
 
-  const handleChange = useMutation({
-    mutationFn: (param) => {
-      axios.patch(`/api/issues/${param.issueId}`, { assignee: param.assignee });
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: [
-          "issues",
-          currentProject.id,
-          page,
-          size,
-          sort,
-          order,
-          filter,
-        ],
-      });
-    },
-  });
+  // const handleChange = useMutation({
+  //   mutationFn: (param) => {
+  //     axios.patch(`/api/issues/${param.issueId}`, { assignee: param.assignee });
+  //   },
+  //   onSettled: () => {
+  //     queryClient.invalidateQueries({
+  //       queryKey: [
+  //         "issues",
+  //         currentProject.id,
+  //         page,
+  //         size,
+  //         sort,
+  //         order,
+  //         filter,
+  //       ],
+  //     });
+  //   },
+  // });
 
   const handleSort = (param) => {
     if (sort !== param) {
@@ -227,22 +218,22 @@ export default function Issues() {
     }
 
     // dropdown to choose another assignee
-    const AssigneeDropdown = ({ issueId }) => {
-      if (usersLoading) return <p>Loading...</p>;
+    // const AssigneeDropdown = ({ issueId }) => {
+    //   if (usersLoading) return <p>Loading...</p>;
 
-      return (
-        <>
-          {users?._embedded?.userModelList.map((u) => (
-            <Dropdown.Item
-              key={u.id}
-              onClick={() => handleChange.mutate({ issueId, assignee: u.id })}
-            >
-              <UserBadge user={u}></UserBadge>
-            </Dropdown.Item>
-          ))}
-        </>
-      );
-    };
+    //   return (
+    //     <>
+    //       {users?._embedded?.userModelList.map((u) => (
+    //         <Dropdown.Item
+    //           key={u.id}
+    //           onClick={() => handleChange.mutate({ issueId, assignee: u.id })}
+    //         >
+    //           <UserBadge user={u}></UserBadge>
+    //         </Dropdown.Item>
+    //       ))}
+    //     </>
+    //   );
+    // };
 
     return (
       <>

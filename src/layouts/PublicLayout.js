@@ -1,9 +1,7 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { Outlet } from "react-router-dom";
 import AppNavbarBase from "../components/AppNavbarBase";
 
 export const PublicLayout = () => {
-  const { user } = useAuth();
 
   // if (user) {
   //   return <Navigate to="/projects" replace />;
