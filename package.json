@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "$PROXY",
+  "proxy": "https://issuetracker-production.up.railway.app",
   "eslintConfig": {
     "extends": [
       "react-app",
