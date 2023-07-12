@@ -5,24 +5,23 @@ export default function Breadcrumbs() {
     const location = useLocation();
 
     let currentLink = '';
-    console.log(location)
 
     const crumbs =
         <Breadcrumb>
-            {location.pathname === '/' ? <Breadcrumb.Item active href="/">home</Breadcrumb.Item> : <Breadcrumb.Item href="/">home</Breadcrumb.Item>}
+            {location.pathname === '/' ? <Breadcrumb.Item active key="home" href="/">home</Breadcrumb.Item> : <Breadcrumb.Item href="/" key="home">home</Breadcrumb.Item>}
 
             {location.pathname.split('/').filter(crumb => crumb !== '').map((crumb, index, row) => {
                 currentLink += `/${crumb}`
 
                 if (index + 1 !== row.length) {
                     return (
-                        <Breadcrumb.Item
+                        <Breadcrumb.Item key={crumb}
                             href={currentLink}>{crumb}
                         </Breadcrumb.Item>
                     )
                 } else {
                     return (
-                        <Breadcrumb.Item active
+                        <Breadcrumb.Item active key={crumb}
                             href={currentLink}>{crumb}
                         </Breadcrumb.Item>
                     )
