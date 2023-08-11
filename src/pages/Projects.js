@@ -48,7 +48,7 @@ export const Projects = () => {
   };
 
   const remove = async (id) => {
-    console.log("trying to remove issue ", `${address}/api/projects/${id}`)
+    // console.log("trying to remove issue ", `${address}/api/projects/${id}`)
     await axios.delete(`${address}/api/projects/${id}`, );
     // TO MAKE OPTIMISTIC UPDATE:
     // let updatedProjects = [...projects].filter((i) => i.id !== id);
