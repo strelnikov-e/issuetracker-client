@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { UserBadge } from "../components/UserBadge";
 import { useFetchUserRoles } from "../utils/Repositories";
+import { address } from "../components/Constants";
 
 const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,50}$/;
 
@@ -59,9 +60,9 @@ export const ProjectAccess = () => {
   const handleChangeRole = useMutation({
     mutationFn: (param) => {
       if (param.role === "NONE") {
-        return axios.delete(`/api/roles/${param.id}`);
+        return axios.delete(`${address}/api/roles/${param.id}`);
       } else {
-        return axios.patch(`/api/roles/${param.id}/role`, { role: param.role });
+        return axios.patch(`${address}/api/roles/${param.id}/role`, { role: param.role });
       }
     },
     onSuccess: () => {
@@ -114,7 +115,7 @@ export const ProjectAccess = () => {
 
     const addUser = useMutation({
       mutationFn: (event) => {
-        return axios.post(`/api/roles`, {
+        return axios.post(`${address}/api/roles`, {
           role: draftUser.role,
           user: { email: email },
           project: { id: id },
@@ -172,7 +173,35 @@ export const ProjectAccess = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-4">
-        
+        <Stack direction="horizontal" gap={3} className="px-3 mb-5">
+        <div className="">
+          <InfoCircleFill size={20} color="RebeccaPurple" />
+        </div>{" "}
+        <div>
+          User should be registered. To add user please provide his or her valid email.
+          <hr></hr>    Some of the registered emails for test:
+          <li>
+          ryan@test.com
+          </li>
+          <li>
+          jared@test.com
+          </li>
+          <li>
+          sandra@test.com
+          </li>
+          <li>
+          karim@test.com
+          </li>
+          <li>
+          monica@test.com
+          </li>
+          <li>
+          jian@test.com
+          </li>
+          <br></br>
+          All test users have password: Test123
+        </div>
+      </Stack>
           <Form
             onSubmit={(event) => {
               event.preventDefault();

@@ -10,6 +10,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { UserBadge } from "../components/UserBadge";
 import { useAuth } from "../hooks/useAuth";
+import { address } from "../components/Constants";
 
 export default function ProjectDetails() {
   const { user } = useAuth();
@@ -30,13 +31,13 @@ export default function ProjectDetails() {
   const { id } = useParams();
 
   // const fetch = async () => {
-  //   const response = await axios.get(`/api/projects/${id}`);
+  //   const response = await axios.get(`${address}/api/projects/${id}`);
   //   return response;
   // };
 
   useEffect(() => {
     if (id !== "new") {
-      axios.get(`/api/projects/${id}`)
+      axios.get(`${address}/api/projects/${id}`)
         .then((data) => setProject(data.data));
     }
   }, [id, setProject ]);
@@ -50,9 +51,9 @@ export default function ProjectDetails() {
     event.preventDefault();
     project["startDate"] = event.target.startDate.value;
     if (project.id) {
-      axios.put(`/api/projects/${project.id}`, project);
+      axios.put(`${address}/api/projects/${project.id}`, project);
     } else {
-      axios.post(`/api/projects`, project);
+      axios.post(`${address}/api/projects`, project);
     }
 
     setProject(initialFormState);

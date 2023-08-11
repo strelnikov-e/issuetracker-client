@@ -13,6 +13,8 @@ import { Draggable } from "react-beautiful-dnd";
 import { Container } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Plus } from "react-bootstrap-icons";
+import { address } from "./Constants";
+
 
 function IssueBoard({ data, status, project, isLoading, error, url }) {
   let initialFormState = {
@@ -37,7 +39,7 @@ function IssueBoard({ data, status, project, isLoading, error, url }) {
 
   const mutation = useMutation({
     mutationFn: () => {
-      return axios.post(`/api/issues`, draftIssue);
+      return axios.post(`${address}/api/issues`, draftIssue);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [url] });

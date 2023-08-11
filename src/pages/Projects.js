@@ -26,6 +26,7 @@ import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
 import { UserBadgeLarge, UserBadge } from "../components/UserBadge";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { address } from "../components/Constants";
 
 export const Projects = () => {
   const [user, setUser] = useLocalStorage("user", null);
@@ -47,14 +48,16 @@ export const Projects = () => {
   };
 
   const remove = async (id) => {
-    await axios.delete(`/api/projects/${id}`);
+    console.log("trying to remove issue ", `${address}/api/projects/${id}`)
+    await axios.delete(`${address}/api/projects/${id}`, );
     // TO MAKE OPTIMISTIC UPDATE:
     // let updatedProjects = [...projects].filter((i) => i.id !== id);
     // setProjects(updatedProjects);
     const response = await axios.get(
-      "/api/users/details",
+      `${address}/api/users/details`,
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          'Content-Type': 'application/json'}
       }
     );
     setUser({ ...user, currentProject: response.data.currentProject });

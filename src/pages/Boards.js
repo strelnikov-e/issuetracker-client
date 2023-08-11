@@ -9,7 +9,7 @@ import IssueBoard from "../components/IssueBoard";
 import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
 import { Form } from "react-bootstrap";
-
+import { address } from "../components/Constants";
 
 export default function Boards() {
   const { logout } = useAuth();
@@ -20,14 +20,14 @@ export default function Boards() {
 
   const { currentProject } = useContext(ProjectContext);
 
-  const url = `/api/issues${showAll}?project=${currentProject?.id}&sort=${sort},${order}`;
+  const url = `${address}/api/issues${showAll}?project=${currentProject?.id}&sort=${sort},${order}`;
   const queryClient = useQueryClient();
   const { data, isLoading, error } = useFetchBoards(url, url);
 
   const update = useMutation({
     mutationFn: (issue) => {
       const statusUpdate = { status: issue.newStatus };
-      return axios.patch(`/api/issues/${issue.id}`, statusUpdate);
+      return axios.patch(`${address}/api/issues/${issue.id}`, statusUpdate);
     },
     onMutate: async (issueList) => {
       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)

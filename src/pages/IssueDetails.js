@@ -16,10 +16,12 @@ import { Stack } from "react-bootstrap";
 import { UserBadge } from "../components/UserBadge";
 import { useFetchUsers } from "../utils/Repositories";
 import Breadcrumbs from "../components/Breadcrumbs";
+import { address } from "../components/Constants";
+
 
 export default function IssueDetails() {
   const { currentProject } = useContext(ProjectContext);
-  const url = `/api/issues?project=${currentProject.id}`;
+  const url = `${address}/api/issues?project=${currentProject.id}`;
   const queryClient = useQueryClient();
   const { id } = useParams();
   const { user } = useAuth();
@@ -46,7 +48,7 @@ export default function IssueDetails() {
 
   useEffect(() => {
     if (id !== "new") {
-      axios.get(`/api/issues/${id}`).then((data) => setDraftIssue(data.data));
+      axios.get(`${address}/api/issues/${id}`).then((data) => setDraftIssue(data.data));
     }
   }, [id]);
 
@@ -63,9 +65,15 @@ export default function IssueDetails() {
         ? event.target.closeDate.value
         : draftIssue.closeDate;
     if (!draftIssue.id) {
-      await axios.post(`/api/issues`, draftIssue);
+      await axios.post(`${address}/api/issues`, draftIssue, {
+        headers: {
+          'Content-Type': 'application/json'}
+      });
     } else {
-      await axios.put(`/api/issues/${draftIssue.id}`, draftIssue);
+      await axios.put(`${address}/api/issues/${draftIssue.id}`, draftIssue, {
+        headers: {
+          'Content-Type': 'application/json'}
+      });
     }
     setDraftIssue(initialFormState);
     queryClient.invalidateQueries({ queryKey: [url] });

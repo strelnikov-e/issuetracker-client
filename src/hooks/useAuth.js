@@ -4,6 +4,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import axios from "axios";
 import { setAuthToken } from "../utils/SetGlobalAuthToken";
 import { ProjectContext } from "../App";
+import { address } from "../components/Constants";
 
 const AuthContext = createContext();
 
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     // after succesful login - fetch user data and set the project user working on
     const response = await axios.get(
-      "/api/users/details",
+      `${address}/api/users/details`,
       data,
       {
         headers: { "Content-Type": "application/json" },

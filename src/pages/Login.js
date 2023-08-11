@@ -10,6 +10,7 @@ import "../css/Login.css";
 import { setAuthToken } from "../utils/SetGlobalAuthToken";
 import { InfoCircleFill } from "react-bootstrap-icons";
 import { Stack } from "react-bootstrap";
+import { address } from "../components/Constants";
 
 const Login = () => {
   const { login } = useAuth();
@@ -40,17 +41,17 @@ const Login = () => {
     const data = { email, password }
     try {
       const response = await axios.post(
-        "/api/token",
+        `${address}/api/token`,
         data,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      // console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify(response?.data));
       data["token"] = response?.data;
       setAuthToken(response?.data);
 
-      const getUser = await axios.get("/api/users/details");
+      const getUser = await axios.get(`${address}/api/users/details`);
       const user = {...getUser.data, token: response?.data}
       
       login(user);

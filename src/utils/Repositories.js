@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { address } from "../components/Constants";
 
 export const useFetchProjects = (page, size) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["projects", page, size],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/projects?page=${page}&size=${size}`
+        `${address}/api/projects?page=${page}&size=${size}`
       );
-      // console.log("FETCH PROJECTS RESPONSE ", response);
+      console.log("FETCH PROJECTS RESPONSE ", response);
       return response.data;
     },
     keepPreviousData: true,
@@ -30,9 +31,9 @@ export const useFetchIssues = (
     queryKey: ["issues", project, page, size, sort, order, filter, incomplete],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/issues?project=${project}&page=${page}&size=${size}&sort=${sort},${order}&${filter}&${incomplete}`
+        `${address}/api/issues?project=${project}&page=${page}&size=${size}&sort=${sort},${order}&${filter}&${incomplete}`
       );
-      // console.log("FETCH ISSUES RESPONSE ", response);
+      console.log("FETCH ISSUES RESPONSE ", response);
       return (response).data;
     },
     keepPreviousData: true,
@@ -52,9 +53,9 @@ export const useFetchMyWork = (
     queryKey: ["mywork", project, assignee, page, size, sort, order],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/issues?project=${project}&assignee=${assignee}&page=${page}&size=${size}&sort=${sort},${order}`
+        `${address}/api/issues?project=${project}&assignee=${assignee}&page=${page}&size=${size}&sort=${sort},${order}`
       );
-      // console.log("FETCH MY WORK RESPONSE ", response);
+      console.log("FETCH MY WORK RESPONSE ", response);
       return (response).data;
     },
     keepPreviousData: true,
@@ -72,19 +73,19 @@ export const useFetchBoards = (key, url) => {
         return result;
       }),
   });
-  // console.log("FETCH BOARDS WITH PROJECT ID", data);
+  console.log("FETCH BOARDS WITH PROJECT ID", data);
   return { isLoading, error, data };
 };
 
 export const useChangeProject = async (id) => {
-  const response = await axios.patch(`/api/users`, { currentProject: id });
-  // console.log("CHANGE PROJECT PATCH REQUEST ", response);
+  const response = await axios.patch(`${address}/api/users`, { currentProject: id });
+  console.log("CHANGE PROJECT PATCH REQUEST ", response);
   return response.data;
 };
 
 export const useFetchUserDetails = async () => {
-  const responce = await axios.get("/api/users/details");
-  // console.log(responce.data);
+  const responce = await axios.get(`${address}/api/users/details`);
+  console.log("FETCH USER DETAILS", responce.data);
   return responce.data;
 };
 
@@ -92,11 +93,11 @@ export const useFetchUsers = (projectId) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["users", projectId],
     queryFn: () =>
-      axios.get(`/api/users?project=${projectId}`).then((response) => {
+      axios.get(`${address}/api/users?project=${projectId}`).then((response) => {
         return response?.data;
       }),
   });
-  // console.log("FETCH USERS WITH PROJECT ID", data);
+  console.log("FETCH USERS WITH PROJECT ID", data);
   return { isLoading, error, data };
 };
 
@@ -104,8 +105,8 @@ export const useFetchCurrentProject = (projectId) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["currentProject", projectId],
     queryFn: async () => {
-      const response = await axios.get(`/api/projects/${projectId}`);
-      // console.log("FETCH CURRENT PROJECT RESPONSE ", response);
+      const response = await axios.get(`${address}/api/projects/${projectId}`);
+      console.log("FETCH CURRENT PROJECT RESPONSE ", response);
       return response.data;
     },
   });
@@ -117,11 +118,11 @@ export const useFetchUserRoles = (projectId, page, size, sort, order, filter) =>
   const { isLoading, error, data } = useQuery({
     queryKey: ["roles", projectId, page, size, sort, order, filter],
     queryFn: () =>
-      axios.get(`/api/roles/project?project=${projectId}&page=${page}&size=${size}&sort=${sort},${order}&${filter}`).then((response) => {
+      axios.get(`${address}/api/roles?project=${projectId}&page=${page}&size=${size}&sort=${sort},${order}&${filter}`).then((response) => {
         return response?.data;
       }),
   });
-  // console.log("FETCH USERS ROLES WITH PROJECT ID", data);
+  console.log("FETCH USERS ROLES WITH PROJECT ID", data);
   return { isLoading, error, data };
 };
 

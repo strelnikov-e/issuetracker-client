@@ -9,6 +9,7 @@ import { DropdownButton } from "react-bootstrap";
 import { PriorityBadge } from "./PriorityBadge.js";
 import { UserBadgeSmOnly } from "./UserBadge.js";
 import { ThreeDots } from "react-bootstrap-icons";
+import { address } from "./Constants.js";
 
 function IssueCard({
   data: { id, name, key, type, priority, assignee, status, project, _links, url },
@@ -20,7 +21,7 @@ function IssueCard({
 
   const handleDelete = useMutation({
     mutationFn: () => {
-      return axios.delete(`/api/issues/${id}`);
+      return axios.delete(`${address}/api/issues/${id}`);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [url] });

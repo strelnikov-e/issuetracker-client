@@ -12,6 +12,7 @@ import { UserBadge } from "../components/UserBadge";
 import { useChangeProject } from "../utils/Repositories";
 import { ProjectContext } from "../App";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { address } from "../components/Constants";
 
 export default function CreateProjectPage() {
   const { setCurrentProject } = useContext(ProjectContext);
@@ -46,10 +47,10 @@ export default function CreateProjectPage() {
     event.preventDefault();
     project["startDate"] = event.target.startDate.value;
     if (project.id) {
-      axios.put(`/api/projects/${project.id}`, project);
+      axios.put(`${address}/api/projects/${project.id}`, project);
     } else {
       axios
-        .post(`/api/projects`, project)
+        .post(`${address}/api/projects`, project)
         .then((data) => HandleChooseProject(data.data));
     }
 

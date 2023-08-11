@@ -18,9 +18,10 @@ import { StatusConverter } from "../components/StatusBadge";
 import { useFetchMyWork } from "../utils/Repositories";
 import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
+import { address } from "../components/Constants";
 
 export const issueLoader = async () => {
-  const response = await axios.get("/api/issues");
+  const response = await axios.get(`${address}/api/issues`);
   if (!response.ok) {
     throw Error("Could not fetch the issues");
   }

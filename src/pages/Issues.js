@@ -34,9 +34,10 @@ import { useFetchUsers } from "../utils/Repositories";
 import { UserBadge } from "../components/UserBadge";
 import { ProjectContext } from "../App";
 import { useAuth } from "../hooks/useAuth";
+import { address } from "../components/Constants";
 
 export const issueLoader = async () => {
-  const response = await axios.get("/api/issues");
+  const response = await axios.get("${address}/api/issues");
   if (!response.ok) {
     throw Error("Could not fetch the issues");
   }
@@ -77,7 +78,7 @@ export default function Issues() {
 
   const handleDelete = useMutation({
     mutationFn: (id) => {
-      return axios.delete(`/api/issues/${id}`);
+      return axios.delete(`${address}/api/issues/${id}`);
     },
     onSettled: () => {
       queryClient.invalidateQueries({
@@ -93,25 +94,6 @@ export default function Issues() {
       });
     },
   });
-
-  // const handleChange = useMutation({
-  //   mutationFn: (param) => {
-  //     axios.patch(`/api/issues/${param.issueId}`, { assignee: param.assignee });
-  //   },
-  //   onSettled: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: [
-  //         "issues",
-  //         currentProject.id,
-  //         page,
-  //         size,
-  //         sort,
-  //         order,
-  //         filter,
-  //       ],
-  //     });
-  //   },
-  // });
 
   const handleSort = (param) => {
     if (sort !== param) {

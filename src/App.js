@@ -101,7 +101,7 @@ export const CreateProject = () => {
 const App = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
 
-  // console.log(user)
+  console.log("App.js USER", user)
 
   const proj = user?.currentProject || { id: 0, name: <CreateProject /> };
   const [project, setProject] = useState(proj);

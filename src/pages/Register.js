@@ -9,9 +9,11 @@ import Card from "react-bootstrap/Card";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import "../css/Login.css";
+import { address } from "../components/Constants";
 
 const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,50}$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
 
 export default function Login() {
   // to set focus on error
@@ -83,7 +85,7 @@ export default function Login() {
     }
     try {
       await axios.post(
-        "/api/users",
+        `${address}/api/users`,
         JSON.stringify({ email, password: pwd, firstName, lastName, company }),
         {
           headers: { "Content-Type": "application/json" },
