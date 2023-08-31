@@ -17,7 +17,7 @@ function AppNavbarBase() {
   const { user, logout } = useAuth();
 
   return (
-    <Navbar bg="light" data-bs-theme="primary" expand="md" variant="light" className="shadow-sm border-bottom" style={{height: "55px"}}>
+    <Navbar fixed="top" bg="light" data-bs-theme="primary" expand="md" variant="light" className="shadow-sm border-bottom" style={{height: "55px"}}>
       <Container>
         <Navbar.Brand className="fs-4" href="/">
 

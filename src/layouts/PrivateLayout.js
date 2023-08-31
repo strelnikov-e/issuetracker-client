@@ -19,15 +19,13 @@ export const PrivateLayout = () => {
 
   return (
     <>
-    
-        <AppNavbarBase />
-    <div className="root-layout">
-      <header className="mb-4">
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
+      <AppNavbarBase />
+      <div className="root-layout">
+        <header className="mb-4"></header>
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </>
   );
 };

@@ -199,7 +199,7 @@ export const ProjectAccess = () => {
           jian@test.com
           </li>
           <br></br>
-          All test users have password: Test123
+          All test users have password: 'password'
         </div>
       </Stack>
           <Form
