@@ -3,10 +3,6 @@ import AppNavbarBase from "../components/AppNavbarBase";
 
 export const PublicLayout = () => {
 
-  // if (user) {
-  //   return <Navigate to="/projects" replace />;
-  // }
-
   return (
     <div className="root-layout p-0">
         <header className="mb-4">
