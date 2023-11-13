@@ -43,7 +43,7 @@ function AppNavbarBase() {
                   <UserBadgeOnly user={user} />
                 </span>
               >
-              <Dropdown.Header>Hello {user.firstName + " " + user.lastName}</Dropdown.Header>
+              <Dropdown.Header>Welcome {user.firstName + " " + user.lastName}</Dropdown.Header>
                 <Dropdown.Item>
                   <div onClick={logout}>
                     Logout
