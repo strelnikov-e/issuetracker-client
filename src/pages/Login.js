@@ -37,12 +37,44 @@ const Login = () => {
   // send email and password to backend and recieve token
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setAuthToken("")
-    const data = { email, password }
+    setAuthToken("");
+    const data = { email, password };
+    try {
+      const response = await axios.post(`${address}/api/token`, data, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(JSON.stringify(response?.data));
+      data["token"] = response?.data;
+      setAuthToken(response?.data);
+
+      const getUser = await axios.get(`${address}/api/users/details`);
+      const user = { ...getUser.data, token: response?.data };
+
+      login(user);
+      navigate(from, { replace: true });
+    } catch (err) {
+      // console.log(err)
+      if (!err?.response) {
+        setErrMsg("No response from server");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing email or Password");
+      } else if (err.response?.status === 401) {
+        // console.log("error 401")
+        setErrMsg("Wrong email or password");
+      } else {
+        setErrMsg("Login failed");
+      }
+    }
+  };
+
+  const handleDemoAccess = async (event) => {
+    event.preventDefault();
+    setAuthToken("");
+    const data = { email: "jared@test.com", password: "password" };
     try {
       const response = await axios.post(
         `${address}/api/token`,
-        data,
+        { email: "jared@test.com", password: "password" },
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -52,11 +84,10 @@ const Login = () => {
       setAuthToken(response?.data);
 
       const getUser = await axios.get(`${address}/api/users/details`);
-      const user = {...getUser.data, token: response?.data}
-      
+      const user = { ...getUser.data, token: response?.data };
+
       login(user);
       navigate(from, { replace: true });
-
     } catch (err) {
       // console.log(err)
       if (!err?.response) {
@@ -97,11 +128,9 @@ const Login = () => {
         )}
         <Card.Body className="p-0">
           <hr></hr>
-          <Form onSubmit={handleSubmit} className="d-grid mb-5">
+          <Form onSubmit={handleSubmit} className="d-grid mb-4">
             <Form.Group size="lg" className="mb-3" controlId="email">
-              <Form.Label className="text-muted fw-semibold">
-                Email
-              </Form.Label>
+              <Form.Label className="text-muted fw-semibold">Email</Form.Label>
               <Form.Control
                 autoFocus
                 type="text"
@@ -123,7 +152,7 @@ const Login = () => {
               />
             </Form.Group>
             <Button
-              className="btn-dark fw-semibold"
+              className="btn-dark fw-semibold mb-4"
               block="true"
               size="lg"
               type="submit"
@@ -131,6 +160,14 @@ const Login = () => {
             >
               Sign In
             </Button>
+          <Button
+            className="btn-success opacity-75 fw-semibold mb-4"
+            block="true"
+            size="lg"
+            onClick={handleDemoAccess}
+          >
+            Demo access
+          </Button>
           </Form>
 
           <p className="text-center">
@@ -141,22 +178,21 @@ const Login = () => {
           </p>
         </Card.Body>
         <Stack direction="horizontal" gap={3} className="px-3 py-5">
-        <div className="">
-          <InfoCircleFill size={20} color="RebeccaPurple" />
-        </div>{" "}
-        <div className="text-secondary">
-          To test application you can create account OR user one of the following test users:
-          <ul className="mt-2">
-            <li>ryan@test.com - Administrator</li>
-            <li>jared@test.com - Manager (Recommended)</li>
-            <li>sandra@test.com - Viewer</li>
-          </ul>
+          <div className="">
+            <InfoCircleFill size={20} color="RebeccaPurple" />
+          </div>{" "}
+          <div className="text-secondary">
+            To test application you can create account OR user one of the
+            following test users:
+            <ul className="mt-2">
+              <li>ryan@test.com - Administrator</li>
+              <li>jared@test.com - Manager (Recommended)</li>
+              <li>sandra@test.com - Viewer</li>
+            </ul>
             Password for all test users: password
-        </div>
-      </Stack>
+          </div>
+        </Stack>
       </Card>
-
-      
     </div>
   );
 };

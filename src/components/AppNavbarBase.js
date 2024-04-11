@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Dropdown } from "react-bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-import Logo from "../logo.svg"
+import Logo from "../logo.png"
 
 import AppNavbar from "./AppNavbar";
 

@@ -50,31 +50,6 @@ import MyWorkLayout from "./layouts/MyWorkLayout";
 const GetUserData = () => {
   // const [ setUser] = useLocalStorage("user");
   const user = window.localStorage.getItem("user");
-
-  // const fetchUser = async () => {
-  //   const responce = await axios.get("/api/users/details");
-  //   console.log(responce.data);
-  //   const data = {
-  //     ...JSON.parse(user),
-  //     firstName: responce.data.firstName,
-  //     lastName: responce.data.lastName,
-  //     id: responce.data.id,
-  //     company: responce.data.companyName,
-  //   };
-  //   console.log(data);
-  //   console.log(user);
-  //   return JSON.stringify( data);
-  // };
-
-  // return fetchUser();
-
-  // const fetchUser = useFetchUser();
-  // const response = {...fetchUser, "firstName": fetchUser.firstName, "lastName": fetchUser.lastName}
-  // if (user.token) {
-  // console.log("inside if")
-  // const userFetch = axios.get("/api/users/details")
-  // .then(data => console.log(data.data))
-  // }
   return user;
 };
 

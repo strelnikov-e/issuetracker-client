@@ -49,7 +49,7 @@ function IssueBoard({ data, status, project, isLoading, error, url }) {
 
   return (
     <Col className="px-2 py-4">
-      <Card style={{ width: "250px" }} className="bg-light" key={status}>
+      <Card style={{ width: "280px" }} className="bg-light" key={status}>
         <Card.Body className="px-1">
           <Card.Subtitle className="bg-light mb-2 px-2">{status}</Card.Subtitle>
           <Droppable droppableId={draftIssue.status}>

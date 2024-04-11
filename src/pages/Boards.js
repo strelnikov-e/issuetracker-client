@@ -167,7 +167,7 @@ export default function Boards() {
         <p>Loading...</p>
       ) : (
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <div className="d-flex flex-row flex-nowrap" style={{margin: "1px"}}>
+          <div className="d-inline-flex " style={{margin: "1px"}}>
             {data.columnOrder.map((column) => {
               const issueList = data.columns[column].issueIds.map(
                 (id) => data.issues[id]
