@@ -1,12 +1,3 @@
-import { Button, Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
-import { Accordion } from "react-bootstrap";
-
-import kanban from "../assets/kanban.png";
-import roles from "../assets/roles.png";
-import issues from "../assets/issues.png";
-import yourwork from "../assets/yourwork.png";
-
 import issuetracker from "../assets/issue-tracker.png";
 
 export default function Home() {
@@ -27,7 +18,7 @@ export default function Home() {
     </span>
   );
   const Patch = () => (
-    <span className="me-1" style={{ color: "lightgrey" }} className="text-lg">
+    <span className="me-1 text-lg" style={{ color: "lightgrey" }}>
       PATCH
     </span>
   );
